@@ -21,8 +21,17 @@ Route::get('/home', function () {
 Route::get('/', function () {
     return view('welcome');
 });
-Route::get('/dashboard',[DashboardController::class,'index']);
-Route::get('/product',[DashboardController::class,'products']);
+Route::get('/dashboard', [DashboardController::class, 'index']);
+Route::get('/product', [DashboardController::class, 'products']);
 
-Route::get('/getlist',[ProductController::class,'getlist']);
-Route::post('/addproduct',[ProductController::class,'addproduct']);
+Route::get('/getlist', [ProductController::class, 'getlist']);
+Route::get('/getlistdel', [ProductController::class, 'getlistdel']);
+
+Route::get('/getproduct', [ProductController::class, 'getproducts']);
+
+Route::POST('/addproduct', [ProductController::class, 'addProduct']);
+Route::POST('/editproduct', [ProductController::class, 'editProduct']);
+Route::POST('/delproduct', [ProductController::class, 'delproduct']);
+Route::POST('/restoreproduct', [ProductController::class, 'restoreproduct']);
+
+

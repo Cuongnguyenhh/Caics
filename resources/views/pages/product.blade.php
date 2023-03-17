@@ -5,16 +5,17 @@
     <div class="col-12">
       <div class="card mb-4">
 
-        <div class="card-header pb-0">
+        <div class="card-header pb-0" id="sidenav-main" data-color="warning">
+          <button class="btn bg-gradient-warning float-end" style="margin-left: 10px;" ng-click="modalDel()">Backup </button>
           <button class="btn btn-success float-end w-25" ng-click="modal('add')">Add new product</button>
-          <h6>Authors table</h6>
+          <h6>Products table</h6>
         </div>
         <div class="card-body px-0 pt-0 pb-2">
           <div class="table-responsive p-0">
             <table class="table align-items-center mb-0">
               <thead>
                 <tr>
-                  <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Author</th>
+                  <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Name</th>
                   <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Price</th>
                   <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Status</th>
                   <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Employed</th>
@@ -39,14 +40,16 @@
 
                   </td>
                   <td class="align-middle text-center text-sm">
-                    <span class="badge badge-sm bg-gradient-success">Saling</span>
+                    <span ng-class="{'badge badge-sm bg-gradient-success': x.prd_status ==1 , 'badge badge-sm bg-gradient-secondary': x.prd_status == 0}">
+                      @{{ x.prd_status == 1 ? 'Selling' : 'Stopped' }}
+                    </span>
                   </td>
                   <td class="align-middle text-center">
-                    <span class="text-secondary text-xs font-weight-bold">@{{x.create_at}}</span>
+                    <span class="text-secondary text-xs font-weight-bold">@{{x.created_at}}</span>
                   </td>
                   <td class="align-middle">
-                    <button type="button" class="btn btn-primary" ng-click="modal('edit')">Edit</button>
-                    </a>
+                    <button type="button" class="btn bg-gradient-primary" ng-click="modal('edit',x.id)">Edit</button>
+                    <button type="button" class="btn bg-gradient-danger " ng-click="modal('del',x.id)">Delete</button>
                   </td>
                 </tr>
               </tbody>
@@ -59,7 +62,7 @@
 
 
   <!-- modal layout -->
-  <div  class="modal fade modal-lg" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal fade modal-lg" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
@@ -67,50 +70,93 @@
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-          <form name="modalProduct" class="w-70 m-auto">
-  
+          <form name="modalProduct" class="w-70 m-auto" enctype="multipart/form-data">
+
             <div class="mb-2">
-              <label class="form-label">Product name</label>
-              <input type="type" class="form-control" id="name" name="name" ng-model="product.name" ng-required="true">
+              <label class="form-label">Product name </label>
+              <input type="type" class="form-control" id="name" name="prd_name" ng-model="product[0].prd_name" ng-required="true">
               <span class="text-danger" ng-show="modalProduct.name.$error.required"> Please type product name</span>
             </div>
             <div class="mb-3">
               <label class="form-label">Price</label>
-              <input type="text" id="price" name="price" class="form-control"  ng-model="product.price" ng-required ="true">
+              <input type="text" id="price" name="prd_price" class="form-control" ng-model="product[0].prd_price" ng-required="true">
               <span class="text-danger" ng-show="modalProduct.price.$error.required"> Please type product price</span>
             </div>
-            <select class="form-select"  id="cate" name= "cate"  aria-label="Default select example" ng-model="product.cate">
-              <option selected>Select product's category</option>
+
+            <label class="form-label">Category</label>
+            <select class="form-select" id="prd_cate" name="cate" aria-label="Default select example" ng-model="product[0].prd_cate" ng-required="true">
               <option value="1">One</option>
               <option value="2">Two</option>
               <option value="3">Three</option>
             </select>
-            <hr>
-            <select class="form-select" aria-label="Default select example" ng-model="product.status">
-              <option selected>Select product's status</option>
+
+            <label class="form-label">Status</label>
+            <select class="form-select" aria-label="Default select example" ng-model="product[0].prd_status" ng-required="true">
               <option value="1">Sale</option>
-              <option value="2">Stop Sale</option>
+              <option value="0">Stop Sale</option>
             </select>
             <div class="mb-3">
-              <label for="formFileMultiple" class="form-label">Choose product image</label>
-              <input class="form-control" type="file" id="formFileMultiple" multiple ng-model="product.img">
+              <label class="form-label">Choose product image</label>
+              <input class="form-control" name="img" type="file" ng-model="product[0].prd_img">
             </div>
           </form>
           <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-primary" ng-disabled="modalProduct.$invalid" ng-click="save(state) ">Save changes</button>
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" ng-click="modal('close')">Close</button>
+            <button type="button" class="btn btn-primary" ng-disabled="modalProduct.$invalid" ng-click="save(state,product[0].id) ">Save changes</button>
           </div>
         </div>
       </div>
+
     </div>
   </div>
-</div>
+
+  <!-- modal deled product -->
+  <div class="modal fade modal-lg" id="deledProduct" tabindex="-1" aria-labelledby="deledProduct" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3 class="modal-title" id="exampleModalLabel">Products Was deleted </h3>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+
+          <table class="table">
+            <thead>
+              <tr class="bg-gradient-success">
+                <th scope="col">Name</th>
+                <th scope="col">Cate</th>
+                <th scope="col">Time delete</th>
+                <th></th>
+
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="bg-gradient-warning" ng-repeat="del in recordsdel">
+                <td><h6>@{{del.prd_name}}</h6></td>
+                <td><h6>@{{del.prd_cate}}</h6></td>
+                <td><h6>@{{del.delete_at}}</h6></td>
+                <td class="align-middle">
+
+                  <button type="button" class="btn btn-sm bg-gradient-success " ng-click="modal('restore',del.id)">Restore</button>
+
+                </td>
+              </tr>
+            </tbody>
+          </table>
+
+       
+        </div>
+      </div>
+
+    </div>
+  </div>
 
 
-<!-- modal edit -->
-<!-- large modal -->
-<!-- Modal -->
-<script>
 
-</script>
-@endsection
+  <!-- modal edit -->
+  <!-- large modal -->
+  <!-- Modal -->
+  <script>
+
+  </script>
+  @endsection

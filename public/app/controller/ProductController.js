@@ -1,71 +1,132 @@
 app.controller('ProductController', function ($scope, $http) {
     const API = 'http://phucuong.net/Caics/';
-    $http.get(API +'getlist').then(function (response) {
+    $http.get(API + 'getlist').then(function (response) {
         $scope.records = response.data;
+
         // console.log($scope.records)
     }, function (error) {
         console.log(error);
-    });
-    $scope.modal = function (state) {
+    }
+    );
+
+    $http.get(API + 'getlistdel').then(function (response) {
+        $scope.recordsdel = response.data;
+
+        // console.log($scope.records)
+    }, function (error) {
+        console.log(error);
+    }
+    );
+    $scope.modalDel = function () {
+        $('#deledProduct').modal('show');
+    };
+    $scope.modal = function (state, id) {
         $scope.state = state;
         switch (state) {
             case 'add':
                 $scope.modaltile = "Add Product";
+                $('#exampleModal').modal('show');
                 break;
             case 'edit':
                 $scope.modaltile = "Edit Product";
+                $http.get(API + 'getproduct?id=' + id).then(function (response) {
+                    $scope.product = response.data;
+                    console.log(response);
+                }, function (error) {
+                    console.log(error);
+                }
+                )
+                $('#exampleModal').modal('show');
+                break;
+            case 'close':
+                $scope.product = null;
+                break;
+            case 'del':
+                console.log(id);
+                var formData = new FormData();
+                formData.append('visible', '0');
+                $http.post(API + 'delproduct?id=' + id).then(function (response) {
+
+                    console.log(response);
+                    location.reload();
+                }, function (error) {
+                    console.log(error);
+                }
+                )
+                break;
+
+                case 'restore':
+                    console.log(id);
+                    var formData = new FormData();
+                    formData.append('visible', '1');
+                    $http.post(API + 'restoreproduct?id=' + id).then(function (response) {
+    
+                        console.log(response);
+                        location.reload();
+                    }, function (error) {
+                        console.log(error);
+                    }
+                    )
+                    break;
+
         }
 
 
-        $('#exampleModal').modal('show');
     }
 
-    // $scope.save = function(state){
-    //     if (state == 'add'){
-    //       var url = API + 'addproduct';
-    //       var formData = new FormData();
-    //       var file = $scope.product.img; // lấy thông tin về file từ thuộc tính img của đối tượng product
-    //       formData.append('file', file);
-    //       formData.append('product', angular.toJson($scope.product)); // chuyển đổi object product sang chuỗi JSON và thêm vào formData
-    //       $http.post({
-           
-    //         url: url,
-    //         data: formData,
-    //         headers: { 'Content-Type' : undefined } // sử dụng undefined để angular tự đặt header
-    //       }).then(function (response) {
-    //         window.location="http://phucuong.net/Caics/addproduct";
-    //         console.log(formData);
-    //         console.log('gigi');
-    //       }),function(error) {
-    //         console.log(error);
-    //       };
-    //     }
-    //   }
-    $scope.save = function(state){
-      if (state == 'add'){
-          var url = API +'addproduct';
-          var formData = new FormData();
-          formData.append('name', $scope.product.name);
-          formData.append('cate', $scope.product.cate);
-          formData.append('status', $scope.product.status);
-          formData.append('price', $scope.product.price);
-          formData.append('img', $scope.product.img); // Thêm hình ảnh vào FormData
-  
-          $http({
-              method: 'POST',
-              url: url,
-              data: formData,
-              headers: { 'Content-Type': undefined } // Đặt content-type là undefined
-          }).then(function(response) {
-              console.log(response);
-          }, function(error) {
-              console.log(error);
-          });
-      }
-  }
-  
-      
-      
-      
+
+    $scope.save = function (state, id) {
+        console.log(state);
+        console.log($scope.product[0].prd_img);
+        if (state == 'add') {
+            var url = API + 'addproduct';
+            var formData = new FormData();
+            formData.append('name', $scope.product[0].prd_name);
+            formData.append('cate', $scope.product[0].prd_cate);
+            formData.append('price', $scope.product[0].prd_price);
+            formData.append('status', $scope.product[0].prd_status);
+            formData.append('img', $scope.product[0].prd_img); // Thêm hình ảnh vào FormData
+
+            $http({
+                method: 'POST',
+                url: url,
+                data: formData,
+                headers: { 'Content-Type': undefined } // Đặt content-type là undefined
+            }).then(function (response) {
+                console.log(response);
+                location.reload();
+
+            }, function (error) {
+                console.log(error);
+            });
+        }
+        if (state == 'edit') {
+            console.log(id);
+            var url = API + 'editproduct?id=' + id;
+            var formData = new FormData();
+            formData.append('name', $scope.product[0].prd_name);
+            formData.append('cate', $scope.product[0].prd_cate);
+            formData.append('price', $scope.product[0].prd_price);
+            formData.append('status', $scope.product[0].prd_status);
+            formData.append('img', $scope.product[0].prd_img); // Thêm hình ảnh vào FormData
+
+            $http({
+                method: 'POST',
+                url: url,
+                data: formData,
+                headers: { 'Content-Type': undefined } // Đặt content-type là undefined
+            }).then(function (response) {
+                console.log(response);
+                location.reload();
+
+            }, function (error) {
+                console.log(error);
+            });
+        }
+
+    }
+
+
+
 
 }); 

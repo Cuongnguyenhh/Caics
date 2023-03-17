@@ -5,39 +5,100 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Productmodel;
 use Facade\FlareClient\View;
+use Illuminate\Support\Facades\Log;
+use DB;
+use Illuminate\Support\Facades\Date;
 
 class ProductController extends Controller
 {
-    public function getlist(){
-        return Productmodel::orderBy('id','desc')->get();
-        
+    public function getlist()
+    {
+        return Productmodel::where('prd_visible', '1')->orderBy('id', 'desc')->get();
     }
+
+public function getlistdel(){
+    return Productmodel::where('prd_visible', '0')->orderBy('id', 'desc')->get();
+}
+
+
+
     public function addProduct(Request $request)
     {
-        $name = $request->input('name');
-        $cate = $request->input('cate');
-        $price = $request->input('price');
-    
-        $img = $request->file('img'); // Lấy thông tin file hình ảnh
-    
-        if ($img) {
-            $imageName = $img->store('../../../public/assets/img'); // Lưu trữ file hình ảnh vào thư mục public/images
-        } else {
-            $imageName = '';
+        try {
+            $data = array();
+            $data['prd_name'] = $request->input('name');
+            $data['prd_cate'] = $request->input('cate');
+            $data['prd_price'] = $request->input('price');
+            $data['prd_status'] = $request->input('status');
+            $data['created_at'] = date('Y-m-d H:i:s');
+            $data['prd_img'] = "builder.webp";
+            DB::table('product')->insert($data);
+
+
+            return response()->json([
+                'success' => true,
+                'product' => $data,
+            ]);
+        } catch (\Exception $e) {
+            // Ghi lại thông báo lỗi vào file log
+            \Log::error($e->getMessage());
+
+            return response()->json([
+                'datass' => $_POST,
+                'success' => false,
+                'message' => "Failed to add product",
+            ]);
         }
-    
-        // Lưu thông tin sản phẩm vào database
-        $product = new Productmodel();
-        $product->prd_name = $name;
-        $product->prd_cate = $cate;
-        $product->prd_price = $price;
-        $product->prd_img = $imageName; // Lưu tên file hình ảnh vào database
-        $product->save();
-    
-        return response()->json([
-            'message' => 'Product created successfully',
-            'data' => $product
-        ]);
+        return $request;
     }
-    
+    public function getproducts()
+    {
+        $id = $_GET['id'];
+        return Productmodel::where('id', $id)->get();
+    }
+
+    public function editProduct(Request $request)
+    {
+        try {
+            $id = $_GET['id'];
+            $data = array();
+            $data['prd_name'] = $request->input('name');
+            $data['prd_cate'] = $request->input('cate');
+            $data['prd_price'] = $request->input('price');
+            $data['prd_status'] = $request->input('status');
+            $data['updated_at'] = date('Y-m-d H:i:s');
+            $data['prd_img'] = 'builder.webp';
+            DB::table('product')->where('id', $id)->update($data);
+
+
+            return response()->json([
+                'success' => true,
+                'product' => $data,
+                'id' => $id,
+            ]);
+        } catch (\Exception $e) {
+            // Ghi lại thông báo lỗi vào file log
+            \Log::error($e->getMessage());
+
+            return response()->json([
+                'success' => false,
+                'message' => $data . "Failed to update product",
+            ]);
+        }
+    }
+
+    public function delproduct(){
+        $data = array();
+        $id = $_GET['id'];
+        $data['prd_visible'] = '0';
+        $data['delete_at'] = date('Y-m-d H:i:s');
+        DB::table('product')->where('id', $id)->update($data);
+    }
+
+    public function restoreproduct(){
+        $data = array();
+        $id = $_GET['id'];
+        $data['prd_visible'] = '1';
+        DB::table('product')->where('id', $id)->update($data);
+    }
 }
