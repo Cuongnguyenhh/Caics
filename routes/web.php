@@ -18,7 +18,11 @@ use Illuminate\Support\Facades\Route;
 Route::get('/home', function () {
     return view('welcome');
 });
-Route::get('/',[DashboardController::class,'index']);
+Route::get('/', function () {
+    return view('welcome');
+});
+Route::get('/dashboard',[DashboardController::class,'index']);
 Route::get('/product',[DashboardController::class,'products']);
 
 Route::get('/getlist',[ProductController::class,'getlist']);
+Route::post('/addproduct',[ProductController::class,'addproduct']);
