@@ -8,7 +8,7 @@
         <div class="card-header pb-0" id="sidenav-main" data-color="warning">
           <button class="btn bg-gradient-warning float-end" style="margin-left: 10px;" ng-click="modalDel()">Backup </button>
           <button class="btn btn-success float-end w-25" ng-click="modal('add')">Add new product</button>
-          <input type="text" class="form-control float-end w-30 h-15" style="margin-right: 10px;" ng-model="searchKeyword" placeholder="Search...">
+          <input type="text" id="searchpr" class="form-control float-end w-30 h-15 bg-light" style="margin-right: 10px;" ng-model="searchKeyword" placeholder="Search...">
           <h6>Products table</h6>
         </div>
         <div class="card-body px-0 pt-0 pb-2">
@@ -124,7 +124,7 @@
 
           <table class="table">
             <div class="form-group">
-              <input type="text" class="form-control" ng-model="searchKeyword" placeholder="Search...">
+              <input type="text" id="searchpr" class="form-control" ng-model="searchKeyword" placeholder="Search...">
             </div>
 
             <thead>

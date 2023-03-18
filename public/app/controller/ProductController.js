@@ -130,7 +130,7 @@ app.controller('ProductController', function ($scope, $http) {
 
     $(document).ready(function() {
         // Khi nhập từ khóa tìm kiếm
-        $('input[type="text"]').on('keyup', function() {
+        $('input[id="searchpr"]').on('keyup', function() {
           // Đặt từ khóa tìm kiếm vào biến $search
           let $search = $(this).val();
           // Lọc dữ liệu theo từ khóa tìm kiếm
