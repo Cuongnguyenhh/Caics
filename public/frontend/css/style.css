@@ -508,6 +508,10 @@ ol {
 
 .banner {
 	height: 500px;
+	
+	box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px, rgba(14, 30, 37, 0.32) 0px 2px 16px 0px;
+	border-radius: 12px;
+	background-image: url("img/banner/banner-1.jpg");
 }
 
 .banner__text span {
@@ -1047,6 +1051,7 @@ ol {
 }
 
 .categories__item {
+	box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
 	border-radius: 12px;
 	height: 314px;
 	display: -webkit-box;
@@ -1061,6 +1066,8 @@ ol {
 }
 
 .categories__item.categories__large__item {
+	box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
+	border-radius: 12px;
 	height: 638px;
 	padding-left: 70px;
 }
@@ -1169,6 +1176,7 @@ ol {
 }
 
 .product__item__pic {
+	box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
 	border-radius: 12px;
 	height: 360px;
 	position: relative;
@@ -2122,6 +2130,7 @@ ol {
 }
 
 .shop__cart__table tbody tr .cart__product__item img {
+	box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 50px;
 	border-radius: 12px;
 	float: left;
 	margin-right: 25px;
@@ -3167,18 +3176,22 @@ ol {
 		border-radius: 15px;
 		width: 95%;
 		margin: auto;
+		box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;
 	}
 }
 
 @media only screen and (min-width: 1200px) and (max-width: 1599px) {
 	.header__menu ul li {
 		margin-right: 20px;
+	
 	}
 	.header {
+	
 		width: 95%;
 		margin: auto;
 		border-radius: 15px;
 		padding: 0 30px;
+		box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;
 	}
 }
 

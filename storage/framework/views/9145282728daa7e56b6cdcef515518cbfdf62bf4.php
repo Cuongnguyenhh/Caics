@@ -1,11 +1,10 @@
-@extends('cart')
-@section('cart_content')
+<?php $__env->startSection('cart_content'); ?>
 <div class="breadcrumb-option">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
                     <div class="breadcrumb__links">
-                        <a href="{{URL::to('/home')}}"><i class="fa fa-home"></i> Home</a>
+                        <a href="<?php echo e(URL::to('/home')); ?>"><i class="fa fa-home"></i> Home</a>
                         <span>Shopping cart</span>
                     </div>
                 </div>
@@ -33,9 +32,9 @@
                             <tbody>
                                 <tr ng-repeat="item in setCart">
                                     <td class="cart__product__item" >
-                                        <img style="width: 80px; height: 80px;" src="{{asset('/storage/app/public/images')}}/@{{item.prd_img}}"alt="">
+                                        <img style="width: 80px; height: 80px;" src="<?php echo e(asset('/storage/app/public/images')); ?>/{{item.prd_img}}"alt="">
                                         <div class="cart__product__item__title">
-                                            <h6>@{{item.prd_name}}</h6>
+                                            <h6>{{item.prd_name}}</h6>
                                             <div class="rating">
                                                 <i class="fa fa-star"></i>
                                                 <i class="fa fa-star"></i>
@@ -45,14 +44,14 @@
                                             </div>
                                         </div>
                                     </td>
-                                    <td class="cart__price">$@{{item.prd_price}}</td>
+                                    <td class="cart__price">${{item.prd_price}}</td>
                                     <td class="cart__quantity">
                                         <div class="pro-qty">
                                             <input type="text" value="1">
                                         </div>
                                     </td>
                                     <td class="cart__total">$ 300.0</td>
-                                    <td ng-click="removeCart($index)" class="cart__close"><span class="icon_close"></span></td>
+                                    <td ng-click="removeCart0($index)" class="cart__close"><span class="icon_close"></span></td>
                                 </tr>
                 
                             </tbody>
@@ -63,7 +62,7 @@
             <div class="row">
                 <div class="col-lg-6 col-md-6 col-sm-6">
                     <div class="cart__btn">
-                        <a href="{{URL::to('/home')}}">Continue Shopping</a>
+                        <a href="<?php echo e(URL::to('/home')); ?>">Continue Shopping</a>
                     </div>
                 </div>
                 <div class="col-lg-6 col-md-6 col-sm-6">
@@ -96,4 +95,5 @@
         </div>
     </section>
     <!-- Shop Cart Section End -->
-    @endsection
+    <?php $__env->stopSection(); ?>
+<?php echo $__env->make('cart', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH /Applications/XAMPP/xamppfiles/htdocs/caics/resources/views/pages-home/cart.blade.php ENDPATH**/ ?>

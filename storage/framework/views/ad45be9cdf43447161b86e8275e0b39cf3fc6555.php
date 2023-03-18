@@ -51,7 +51,7 @@
                                         </div>
                                     </td>
                                     <td class="cart__total">$ 300.0</td>
-                                    <td ng-click="removeCart0($index)" class="cart__close"><span class="icon_close"></span></td>
+                                    <td ng-click="removeCart($index)" class="cart__close"><span class="icon_close"></span></td>
                                 </tr>
                 
                             </tbody>
