@@ -332,7 +332,7 @@
     new Chart(ctx1, {
       type: "line",
       data: {
-        labels: ["Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+        labels: ["Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec","Next","Last"],
         datasets: [{
           label: "Mobile apps",
           tension: 0.4,
@@ -342,7 +342,7 @@
           backgroundColor: gradientStroke1,
           borderWidth: 3,
           fill: true,
-          data: [2, 2, 2, 2, 2, 2, 2, 2, 2],
+          data: [24, 242, 2234, 24, 22, 242, 22, 22, 242,12,1324,124,4124],
           maxBarThickness: 6
         }],
       },

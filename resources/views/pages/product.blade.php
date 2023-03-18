@@ -99,7 +99,7 @@
             </select>
             <div class="mb-3">
               <label class="form-label">Choose product image</label>
-              <input class="form-control" name="img" type="file" ng-model="product[0].prd_img">
+              <input class="form-control" name="img" type="file" ng-model="product[0].prd_img" >
             </div>
           </form>
           <div class="modal-footer">
