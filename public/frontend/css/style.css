@@ -1185,10 +1185,12 @@ ol {
 	position: absolute;
 	left: 10px;
 	top: 10px;
+	border-radius: 9px;
 }
 
 .product__item__pic .label.new {
 	background: #36a300;
+	
 }
 
 .product__item__pic .label.stockout {

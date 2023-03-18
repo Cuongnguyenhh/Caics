@@ -2,6 +2,9 @@
 <html lang="zxx">
 
 <head>
+<script src="https://code.jquery.com/jquery-3.6.4.min.js" integrity="sha256-oP6HI9z1XaZNBrJURtCoUT5SUnxFr8s3BzRl+cbzUq8=" crossorigin="anonymous"></script>
+<script src="./public/app/lib/angular.min.js"></script>  
+<script src="https://kit.fontawesome.com/b907c217d3.js" crossorigin="anonymous"></script>
     <meta charset="UTF-8">
     <meta name="description" content="Ashion Template">
     <meta name="keywords" content="Ashion, unica, creative, html">
@@ -25,7 +28,7 @@
     <link rel="stylesheet" href="css/style.css" type="text/css">
 </head>
 
-<body>
+<body ng-app="myApp" ng-controller="CartController">
     <div class="offcanvas-menu-overlay"></div>
     <div class="offcanvas-menu-wrapper">
         <div class="offcanvas__close">+</div>
@@ -35,7 +38,7 @@
                     <div class="tip">2</div>
                 </a></li>
             <li><a href="#"><span class="icon_bag_alt"></span>
-                    <div class="tip">2</div>
+                    <div class="tip"></div>
                 </a></li>
         </ul>
         <div class="offcanvas__logo">
@@ -50,7 +53,7 @@
     <!-- Offcanvas Menu End -->
 
     <!-- Header Section Begin -->
-    <header class="header">
+    <header class="header" ng-controller="CartController">
         <div class="container-fluid">
             <div class="row">
                 <div class="col-xl-3 col-lg-2">
@@ -89,9 +92,10 @@
                             <li><a href="#"><span class="icon_heart_alt"></span>
                                 <div class="tip">2</div>
                             </a></li>
-                            <li><a href="{{URL::to ('/cart')}}"><span class="icon_bag_alt"></span>
-                                <div class="tip">2</div>
-                            </a></li>
+                           <li><a href="{{URL::to('/cart')}}"><span class="icon_bag_alt"></span>
+  <div class="tip" ng-bind="cartCount"></div>
+</a></li>
+
                         </ul>
                     </div>
                 </div>
@@ -250,6 +254,9 @@
     <script src="js/owl.carousel.min.js"></script>
     <script src="js/jquery.nicescroll.min.js"></script>
     <script src="js/main.js"></script>
+    <script src="../app/app.js"></script> 
+  <script src="../app/controller/ProductController.js"></script>
+  <script src="../app/controller/CartController.js"></script>
 </body>
 
 </html>

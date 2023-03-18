@@ -12,7 +12,7 @@
           <h6>Products table</h6>
         </div>
         <div class="card-body px-0 pt-0 pb-2">
-          <div class="table-responsive p-0" style="height: 450px; overflow: scroll;">
+          <div class="table-responsive p-0" style="height: 450px; ">
             <table class="table align-items-center mb-0">
               <thead >
                 <tr>
@@ -25,7 +25,7 @@
                 </tr>
               </thead>
               <tbody>
-                <tr ng-repeat="x in records | filter:searchKeyword | orderBy:columnName:reverseSort ">
+                <tr ng-repeat="x in records | filter:searchKeyword | orderBy:columnName:reverseSort "  style="overflow: scroll;">
                   <td>
                     <div class="d-flex px-2 py-1">
                       <div>

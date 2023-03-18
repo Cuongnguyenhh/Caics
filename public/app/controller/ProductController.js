@@ -1,5 +1,6 @@
 app.controller('ProductController', function ($scope, $http) {
-    const API = 'http://localhost/Caics/';
+    const API = 'http://phucuong.net/Caics/';
+
     $http.get(API + 'getlist').then(function (response) {
         $scope.records = response.data;
 
@@ -42,7 +43,7 @@ app.controller('ProductController', function ($scope, $http) {
                 $scope.product = null;
                 break;
             case 'del':
-                
+
                 var formData = new FormData();
                 formData.append('visible', '0');
                 $http.post(API + 'delproduct?id=' + id).then(function (response) {
@@ -56,7 +57,7 @@ app.controller('ProductController', function ($scope, $http) {
                 break;
 
             case 'restore':
-         
+
                 var formData = new FormData();
                 formData.append('visible', '1');
                 $http.post(API + 'restoreproduct?id=' + id).then(function (response) {
@@ -143,4 +144,6 @@ app.controller('ProductController', function ($scope, $http) {
         $scope.reverseSort = ($scope.columnName === columnName) ? !$scope.reverseSort : false;
         $scope.columnName = columnName;
     }
+   
+
 }); 
