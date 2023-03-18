@@ -189,10 +189,10 @@
 
                 <div class="col-lg-3 col-md-4 col-sm-6 mix women" ng-repeat="x in records  | limitTo:8">
                     <div class="product__item">
-                        <div class="product__item__pic set-bg" data-setbg="img/product/product-1.jpg">
+                        <div class="product__item__pic set-bg" data-setbg="{{asset('/storage/app/public/images')}}/@{{x.prd_img}}">
                             <ul class="product__hover" ng-controller="CartController">
 
-                                <li><a href="img/product/product-1.jpg" class="image-popup"><span class="arrow_expand"></span></a></li>
+                                <li><a href="{{asset('/storage/app/public/images')}}/@{{x.prd_img}}" class="image-popup"><span class="arrow_expand"></span></a></li>
                                 <li><a href="" ng-click="addProductToCart(x)"><span class="icon_bag_alt"></span></a></li>
 
                                 <li><a href="#"><span class="icon_heart_alt"></span></a></li>

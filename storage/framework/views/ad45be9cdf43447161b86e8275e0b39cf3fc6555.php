@@ -32,7 +32,7 @@
                             <tbody>
                                 <tr ng-repeat="item in setCart">
                                     <td class="cart__product__item" >
-                                        <img src="img/shop-cart/cp-1.jpg" alt="">
+                                        <img style="width: 80px; height: 80px;" src="<?php echo e(asset('/storage/app/public/images')); ?>/{{item.prd_img}}"alt="">
                                         <div class="cart__product__item__title">
                                             <h6>{{item.prd_name}}</h6>
                                             <div class="rating">
@@ -44,14 +44,14 @@
                                             </div>
                                         </div>
                                     </td>
-                                    <td class="cart__price">$ 150.0</td>
+                                    <td class="cart__price">${{item.prd_price}}</td>
                                     <td class="cart__quantity">
                                         <div class="pro-qty">
                                             <input type="text" value="1">
                                         </div>
                                     </td>
                                     <td class="cart__total">$ 300.0</td>
-                                    <td ng-click="removeCart($index)" class="cart__close"><span class="icon_close"></span></td>
+                                    <td ng-click="removeCart0($index)" class="cart__close"><span class="icon_close"></span></td>
                                 </tr>
                 
                             </tbody>

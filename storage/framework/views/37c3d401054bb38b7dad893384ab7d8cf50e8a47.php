@@ -38,9 +38,9 @@
             <li><a href="#"><span class="icon_heart_alt"></span>
                 <div class="tip">2</div>
             </a></li>
-            <li><a href="<?php echo e(URL::to ('/cart')); ?>"><span class="icon_bag_alt"></span>
-                <div class="tip">{{cartCount}}</div>
-            </a></li>
+            <li><a href="<?php echo e(URL::to('/cart')); ?>"><span class="icon_bag_alt"></span>
+  <div class="tip" ng-bind="cartCount"></div>
+</a></li>
         </ul>
         <div class="offcanvas__logo">
             <a href="<?php echo e(URL::to('/home')); ?>"><img src="img/logo.png" alt=""></a>
