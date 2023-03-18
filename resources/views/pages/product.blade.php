@@ -12,9 +12,9 @@
           <h6>Products table</h6>
         </div>
         <div class="card-body px-0 pt-0 pb-2">
-          <div class="table-responsive p-0" style="height: 450px; overflow: auto;">
+          <div class="table-responsive p-0" style="height: 450px; overflow: scroll;">
             <table class="table align-items-center mb-0">
-              <thead>
+              <thead >
                 <tr>
                   <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7" ng-click="sortColumn('prd_name')"><a ng-click="sortColumn('prd_name')">Name</a></th>
                   <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2"><a ng-click="sortColumn('prd_price')">Price</a></th>

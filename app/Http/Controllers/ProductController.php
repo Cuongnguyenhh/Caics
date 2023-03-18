@@ -7,6 +7,7 @@ use App\Models\Productmodel;
 use Facade\FlareClient\View;
 use Illuminate\Support\Facades\Log;
 use DB;
+use Illuminate\Contracts\View\View as ViewView;
 use Illuminate\Support\Facades\Date;
 
 class ProductController extends Controller
@@ -101,4 +102,9 @@ public function getlistdel(){
         $data['prd_visible'] = '1';
         DB::table('product')->where('id', $id)->update($data);
     }
+
+//client controller
+public function productsdetail(){
+    return view('pages-home.product-detail');
+}
 }

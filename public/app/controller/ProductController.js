@@ -1,5 +1,5 @@
 app.controller('ProductController', function ($scope, $http) {
-    const API = 'http://phucuong.net/Caics/';
+    const API = 'http://localhost/Caics/';
     $http.get(API + 'getlist').then(function (response) {
         $scope.records = response.data;
 
@@ -42,7 +42,7 @@ app.controller('ProductController', function ($scope, $http) {
                 $scope.product = null;
                 break;
             case 'del':
-                console.log(id);
+                
                 var formData = new FormData();
                 formData.append('visible', '0');
                 $http.post(API + 'delproduct?id=' + id).then(function (response) {
@@ -55,19 +55,19 @@ app.controller('ProductController', function ($scope, $http) {
                 )
                 break;
 
-                case 'restore':
-                    console.log(id);
-                    var formData = new FormData();
-                    formData.append('visible', '1');
-                    $http.post(API + 'restoreproduct?id=' + id).then(function (response) {
-    
-                        console.log(response);
-                        location.reload();
-                    }, function (error) {
-                        console.log(error);
-                    }
-                    )
-                    break;
+            case 'restore':
+         
+                var formData = new FormData();
+                formData.append('visible', '1');
+                $http.post(API + 'restoreproduct?id=' + id).then(function (response) {
+
+                    console.log(response);
+                    location.reload();
+                }, function (error) {
+                    console.log(error);
+                }
+                )
+                break;
 
         }
 
@@ -128,19 +128,19 @@ app.controller('ProductController', function ($scope, $http) {
 
 
 
-    $(document).ready(function() {
+    $(document).ready(function () {
         // Khi nhập từ khóa tìm kiếm
-        $('input[id="searchpr"]').on('keyup', function() {
-          // Đặt từ khóa tìm kiếm vào biến $search
-          let $search = $(this).val();
-          // Lọc dữ liệu theo từ khóa tìm kiếm
-          $scope.searchKeyword = $search;
-          $scope.$apply();
+        $('input[id="searchpr"]').on('keyup', function () {
+            // Đặt từ khóa tìm kiếm vào biến $search
+            let $search = $(this).val();
+            // Lọc dữ liệu theo từ khóa tìm kiếm
+            $scope.searchKeyword = $search;
+            $scope.$apply();
         });
-      });
-      
-      $scope.sortColumn = function(columnName) {
+    });
+
+    $scope.sortColumn = function (columnName) {
         $scope.reverseSort = ($scope.columnName === columnName) ? !$scope.reverseSort : false;
         $scope.columnName = columnName;
-      }
+    }
 }); 

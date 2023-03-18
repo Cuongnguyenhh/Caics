@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\cartController;
+use App\Http\Controllers\ShopController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -15,12 +17,13 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/home', function () {
-    return view('welcome');
-});
 Route::get('/', function () {
-    return view('welcome');
+    return view('homeshop');
 });
+Route::get('/home', function () {
+    return view('homeshop');
+});
+
 Route::get('/dashboard', [DashboardController::class, 'index']);
 Route::get('/product', [DashboardController::class, 'products']);
 
@@ -33,5 +36,12 @@ Route::POST('/addproduct', [ProductController::class, 'addProduct']);
 Route::POST('/editproduct', [ProductController::class, 'editProduct']);
 Route::POST('/delproduct', [ProductController::class, 'delproduct']);
 Route::POST('/restoreproduct', [ProductController::class, 'restoreproduct']);
+
+//cart routes----------------------------------------------------------------
+Route::GET('/cart', [CartController::class, 'index']);
+//shop routes----------------------------------------------------------------
+Route::GET('/shop', [ShopController::class, 'index']);
+//products client routes----------------------------------------------------------------
+Route::GET('/productdetail', [ProductController::class, 'productsdetail']);
 
 
