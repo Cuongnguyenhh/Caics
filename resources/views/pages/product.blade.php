@@ -8,22 +8,24 @@
         <div class="card-header pb-0" id="sidenav-main" data-color="warning">
           <button class="btn bg-gradient-warning float-end" style="margin-left: 10px;" ng-click="modalDel()">Backup </button>
           <button class="btn btn-success float-end w-25" ng-click="modal('add')">Add new product</button>
+          <input type="text" class="form-control float-end w-30 h-15" style="margin-right: 10px;" ng-model="searchKeyword" placeholder="Search...">
           <h6>Products table</h6>
         </div>
         <div class="card-body px-0 pt-0 pb-2">
-          <div class="table-responsive p-0">
+          <div class="table-responsive p-0" style="height: 450px; overflow: auto;">
             <table class="table align-items-center mb-0">
               <thead>
                 <tr>
-                  <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Name</th>
-                  <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">Price</th>
-                  <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Status</th>
-                  <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Employed</th>
+                  <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7" ng-click="sortColumn('prd_name')"><a ng-click="sortColumn('prd_name')">Name</a></th>
+                  <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2"><a ng-click="sortColumn('prd_price')">Price</a></th>
+                  <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"><a ng-click="sortColumn('prd_status')">Status</a></th>
+
+                  <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"><a ng-click="sortColumn('created_at')">Date Add</a></th>
                   <th class="text-secondary opacity-7"></th>
                 </tr>
               </thead>
               <tbody>
-                <tr ng-repeat="x in records">
+                <tr ng-repeat="x in records | filter:searchKeyword | orderBy:columnName:reverseSort ">
                   <td>
                     <div class="d-flex px-2 py-1">
                       <div>
@@ -62,7 +64,7 @@
 
 
   <!-- modal layout -->
-  <div class="modal fade modal-lg" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal fade modal-md" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
@@ -121,20 +123,30 @@
         <div class="modal-body">
 
           <table class="table">
+            <div class="form-group">
+              <input type="text" class="form-control" ng-model="searchKeyword" placeholder="Search...">
+            </div>
+
             <thead>
               <tr class="bg-gradient-success">
-                <th scope="col">Name</th>
-                <th scope="col">Cate</th>
-                <th scope="col">Time delete</th>
+                <th scope="col" ><a ng-click="sortColumn('prd_name')">Name</a></th>
+                <th scope="col" ><a ng-click="sortColumn('prd_cate')">Category</a></th>
+                <th scope="col" > <a ng-click="sortColumn('delete_at')">Delete At</a></th>
                 <th></th>
 
               </tr>
             </thead>
             <tbody>
-              <tr class="bg-gradient-warning" ng-repeat="del in recordsdel">
-                <td><h6>@{{del.prd_name}}</h6></td>
-                <td><h6>@{{del.prd_cate}}</h6></td>
-                <td><h6>@{{del.delete_at}}</h6></td>
+              <tr class="bg-gradient-warning" ng-repeat="del in recordsdel | filter:searchKeyword | orderBy:columnName:reverseSort">
+                <td>
+                  <h6>@{{del.prd_name}}</h6>
+                </td>
+                <td>
+                  <h6>@{{del.prd_cate}}</h6>
+                </td>
+                <td>
+                  <h6>@{{del.delete_at}}</h6>
+                </td>
                 <td class="align-middle">
 
                   <button type="button" class="btn btn-sm bg-gradient-success " ng-click="modal('restore',del.id)">Restore</button>
@@ -144,13 +156,15 @@
             </tbody>
           </table>
 
-       
+
         </div>
       </div>
 
     </div>
   </div>
 
+  <script>
+  </script>
 
 
   <!-- modal edit -->

@@ -128,5 +128,19 @@ app.controller('ProductController', function ($scope, $http) {
 
 
 
-
+    $(document).ready(function() {
+        // Khi nhập từ khóa tìm kiếm
+        $('input[type="text"]').on('keyup', function() {
+          // Đặt từ khóa tìm kiếm vào biến $search
+          let $search = $(this).val();
+          // Lọc dữ liệu theo từ khóa tìm kiếm
+          $scope.searchKeyword = $search;
+          $scope.$apply();
+        });
+      });
+      
+      $scope.sortColumn = function(columnName) {
+        $scope.reverseSort = ($scope.columnName === columnName) ? !$scope.reverseSort : false;
+        $scope.columnName = columnName;
+      }
 }); 
