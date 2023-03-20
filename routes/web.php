@@ -28,6 +28,8 @@ Route::get('/dashboard', [DashboardController::class, 'index']);
 Route::get('/product', [DashboardController::class, 'products']);
 
 Route::get('/getlist', [ProductController::class, 'getlist']);
+// Route::get('/productdetail', [ProductController::class, 'productDetail']);
+
 Route::get('/getlistdel', [ProductController::class, 'getlistdel']);
 
 Route::get('/getproduct', [ProductController::class, 'getproducts']);
@@ -42,6 +44,6 @@ Route::GET('/cart', [CartController::class, 'index']);
 //shop routes----------------------------------------------------------------
 Route::GET('/shop', [ShopController::class, 'index']);
 //products client routes----------------------------------------------------------------
-Route::GET('/productdetail', [ProductController::class, 'productsdetail']);
+Route::GET('/productdetail', [ProductController::class, 'productdetail']);
 
 

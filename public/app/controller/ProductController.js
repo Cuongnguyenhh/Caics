@@ -95,7 +95,7 @@ app.controller('ProductController', function ($scope, $http) {
                 headers: { 'Content-Type': undefined } // Đặt content-type là undefined
             }).then(function (response) {
                 console.log(response);
-                location.reload();
+                // location.reload();
 
             }, function (error) {
                 console.log(error);
@@ -127,7 +127,14 @@ app.controller('ProductController', function ($scope, $http) {
 
     }
 
-
+        $scope.productDetail = function(product){
+            $scope.productDetail = function(){
+                $scope.x = product;
+            }
+            console.log($scope.productDetail);
+            
+            
+        }
 
     $(document).ready(function () {
         // Khi nhập từ khóa tìm kiếm

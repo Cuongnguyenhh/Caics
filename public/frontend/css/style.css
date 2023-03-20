@@ -2213,6 +2213,8 @@ ol {
 }
 
 .cart__btn a {
+	box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+	border-radius: 25px;
 	font-size: 14px;
 	color: #111111;
 	font-weight: 600;

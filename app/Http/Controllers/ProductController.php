@@ -12,16 +12,27 @@ use Illuminate\Support\Facades\Date;
 
 class ProductController extends Controller
 {
+
+
+
     public function getlist()
     {
         return Productmodel::where('prd_visible', '1')->orderBy('id', 'desc')->get();
     }
 
-public function getlistdel(){
-    return Productmodel::where('prd_visible', '0')->orderBy('id', 'desc')->get();
-}
+    public function getlistdel()
+    {
+        return Productmodel::where('prd_visible', '0')->orderBy('id', 'desc')->get();
+    }
 
+    public function productdetail()
+    {
+        $id = $_GET['id'];
+        $productDetail = Productmodel::find($id);
+        return View('pages-home.product-detail', ['data' => $productDetail]);
+        // return $productDetail;
 
+    }
 
     public function addProduct(Request $request)
     {
@@ -32,7 +43,7 @@ public function getlistdel(){
             $data['prd_price'] = $request->input('price');
             $data['prd_status'] = $request->input('status');
             $data['created_at'] = date('Y-m-d H:i:s');
-            $data['prd_img'] = "builder.webp";
+            $data['prd_img'] = $request->file('img');
             DB::table('product')->insert($data);
 
 
@@ -68,7 +79,7 @@ public function getlistdel(){
             $data['prd_price'] = $request->input('price');
             $data['prd_status'] = $request->input('status');
             $data['updated_at'] = date('Y-m-d H:i:s');
-            $data['prd_img'] = 'builder.webp';
+            $data['prd_img'] = $request->file('img');
             DB::table('product')->where('id', $id)->update($data);
 
 
@@ -88,7 +99,8 @@ public function getlistdel(){
         }
     }
 
-    public function delproduct(){
+    public function delproduct()
+    {
         $data = array();
         $id = $_GET['id'];
         $data['prd_visible'] = '0';
@@ -96,15 +108,17 @@ public function getlistdel(){
         DB::table('product')->where('id', $id)->update($data);
     }
 
-    public function restoreproduct(){
+    public function restoreproduct()
+    {
         $data = array();
         $id = $_GET['id'];
         $data['prd_visible'] = '1';
         DB::table('product')->where('id', $id)->update($data);
     }
 
-//client controller
-public function productsdetail(){
-    return view('pages-home.product-detail');
-}
+    //client controller
+    public function productsdetail()
+    {
+        return view('pages-home.product-detail');
+    }
 }

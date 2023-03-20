@@ -72,36 +72,36 @@
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-          <form name="modalProduct" class="w-70 m-auto" enctype="multipart/form-data">
+            <form name="modalProduct" class="w-70 m-auto" enctype="multipart/form-data">
 
-            <div class="mb-2">
-              <label class="form-label">Product name </label>
-              <input type="type" class="form-control" id="name" name="prd_name" ng-model="product[0].prd_name" ng-required="true">
-              <span class="text-danger" ng-show="modalProduct.name.$error.required"> Please type product name</span>
-            </div>
-            <div class="mb-3">
-              <label class="form-label">Price</label>
-              <input type="text" id="price" name="prd_price" class="form-control" ng-model="product[0].prd_price" ng-required="true">
-              <span class="text-danger" ng-show="modalProduct.price.$error.required"> Please type product price</span>
-            </div>
+              <div class="mb-2">
+                <label class="form-label">Product name </label>
+                <input type="type" class="form-control" id="name" name="prd_name" ng-model="product[0].prd_name" ng-required="true">
+                <span class="text-danger" ng-show="modalProduct.name.$error.required"> Please type product name</span>
+              </div>
+              <div class="mb-3">
+                <label class="form-label">Price</label>
+                <input type="text" id="price" name="prd_price" class="form-control" ng-model="product[0].prd_price" ng-required="true">
+                <span class="text-danger" ng-show="modalProduct.price.$error.required"> Please type product price</span>
+              </div>
 
-            <label class="form-label">Category</label>
-            <select class="form-select" id="prd_cate" name="cate" aria-label="Default select example" ng-model="product[0].prd_cate" ng-required="true">
-              <option value="1">One</option>
-              <option value="2">Two</option>
-              <option value="3">Three</option>
-            </select>
+              <label class="form-label">Category</label>
+              <select class="form-select" id="prd_cate" name="cate" aria-label="Default select example" ng-model="product[0].prd_cate" ng-required="true">
+                <option value="1">One</option>
+                <option value="2">Two</option>
+                <option value="3">Three</option>
+              </select>
 
-            <label class="form-label">Status</label>
-            <select class="form-select" aria-label="Default select example" ng-model="product[0].prd_status" ng-required="true">
-              <option value="1">Sale</option>
-              <option value="0">Stop Sale</option>
-            </select>
-            <div class="mb-3">
-              <label class="form-label">Choose product image</label>
-              <input class="form-control" name="img" type="file" ng-model="product[0].prd_img" >
-            </div>
-          </form>
+              <label class="form-label">Status</label>
+              <select class="form-select" aria-label="Default select example" ng-model="product[0].prd_status" ng-required="true">
+                <option value="1">Sale</option>
+                <option value="0">Stop Sale</option>
+              </select>
+              <div class="mb-3">
+                <label class="form-label">Choose product image</label>
+                <input class="form-control"  name="file" type="file" file-model="product[0].prd_img"  ng-required="true">
+              </div>  
+            </form>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" ng-click="modal('close')">Close</button>
             <button type="button" class="btn btn-primary" ng-disabled="modalProduct.$invalid" ng-click="save(state,product[0].id) ">Save changes</button>

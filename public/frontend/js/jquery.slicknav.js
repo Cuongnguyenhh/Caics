@@ -107,7 +107,7 @@
         }
 
         if (settings.parentTag == 'a') {
-            settings.parentTag = 'a href="#"';
+            settings.parentTag = 'a href=""';
         }
 
         // create menu bar

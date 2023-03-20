@@ -1,4 +1,3 @@
-
 app.controller('CartController', function ($scope, $http) {
     $scope.addProductToCart = function (product) {
         var cart = JSON.parse(sessionStorage.getItem('cart')) || []; // Retrieve cart from session storage, or create new cart if none exists
@@ -46,4 +45,8 @@ app.controller('CartController', function ($scope, $http) {
             document.querySelector('.tip').innerText = newVal;
         }
     });
+
+    $scope.totalPrice = 0;
+
+            
 })
