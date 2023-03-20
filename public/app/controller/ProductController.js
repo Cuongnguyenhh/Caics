@@ -127,14 +127,14 @@ app.controller('ProductController', function ($scope, $http) {
 
     }
 
-        $scope.productDetail = function(product){
-            $scope.productDetail = function(){
-                $scope.x = product;
-            }
-            console.log($scope.productDetail);
-            
-            
+    $scope.productDetail = function (product) {
+        $scope.productDetail = function () {
+            $scope.x = product;
         }
+        console.log($scope.productDetail);
+
+
+    }
 
     $(document).ready(function () {
         // Khi nhập từ khóa tìm kiếm
@@ -151,6 +151,6 @@ app.controller('ProductController', function ($scope, $http) {
         $scope.reverseSort = ($scope.columnName === columnName) ? !$scope.reverseSort : false;
         $scope.columnName = columnName;
     }
-   
+
 
 }); 
