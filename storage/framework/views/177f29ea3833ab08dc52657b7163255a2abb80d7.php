@@ -1,18 +1,17 @@
-
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
-<script src="https://code.jquery.com/jquery-3.6.4.min.js" integrity="sha256-oP6HI9z1XaZNBrJURtCoUT5SUnxFr8s3BzRl+cbzUq8=" crossorigin="anonymous"></script>
-<script src="./public/app/lib/angular.min.js"></script>  
-<script src="https://kit.fontawesome.com/b907c217d3.js" crossorigin="anonymous"></script>
+  <script src="https://code.jquery.com/jquery-3.6.4.min.js" integrity="sha256-oP6HI9z1XaZNBrJURtCoUT5SUnxFr8s3BzRl+cbzUq8=" crossorigin="anonymous"></script>
+  <script src="./public/app/lib/angular.min.js"></script>
+  <script src="https://kit.fontawesome.com/b907c217d3.js" crossorigin="anonymous"></script>
   <meta charset="utf-8" />
   <base href="<?php echo e(asset('./public/backend')); ?>/">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <link rel="apple-touch-icon" sizes="76x76" href="./assets/img/icondash.png">
   <link rel="icon" type="image/png" href="./assets/img/icondash.png">
   <title>
-    Admin | Dashboard 
+    Admin | Dashboard
   </title>
   <!--     Fonts and icons     -->
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet" />
@@ -45,7 +44,7 @@
               <i class="ni ni-tv-2 text-primary text-sm opacity-10"></i>
             </div>
             <span class="nav-link-text ms-1">Dashboard</span>
-        
+
           </a>
         </li>
         <li class="nav-item">
@@ -243,12 +242,12 @@
     <?php echo $__env->yieldContent('admin_content'); ?>
   </main>
   <div class="fixed-plugin">
-    
+
     <a class="fixed-plugin-button text-dark position-fixed px-3 py-2">
       <i class="fa fa-cog py-2"> </i>
     </a>
-    
- 
+
+
     <div class="card shadow-lg">
       <div class="card-header pb-0 pt-3 ">
         <div class="float-start">
@@ -322,87 +321,8 @@
   <script src="./assets/js/core/bootstrap.min.js"></script>
   <script src="./assets/js/plugins/perfect-scrollbar.min.js"></script>
   <script src="./assets/js/plugins/smooth-scrollbar.min.js"></script>
-  <script src="./assets/js/plugins/chartjs.min.js"></script>
-  <script>
-    var ctx1 = document.getElementById("chart-line").getContext("2d");
-    var gradientStroke1 = ctx1.createLinearGradient(0, 230, 0, 50);
-    gradientStroke1.addColorStop(1, 'rgba(94, 114, 228, 0.2)');
-    gradientStroke1.addColorStop(0.2, 'rgba(94, 114, 228, 0.0)');
-    gradientStroke1.addColorStop(0, 'rgba(94, 114, 228, 0)');
-    new Chart(ctx1, {
-      type: "line",
-      data: {
-        labels: ["Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec","Next","Last"],
-        datasets: [{
-          label: "Mobile apps",
-          tension: 0.4,
-          borderWidth: 0,
-          pointRadius: 0,
-          borderColor: "#5e72e4",
-          backgroundColor: gradientStroke1,
-          borderWidth: 3,
-          fill: true,
-          data: [24, 242, 2234, 24, 22, 242, 22, 22, 242,12,1324,124,4124],
-          maxBarThickness: 6
-        }],
-      },
-      options: {
-        responsive: true,
-        maintainAspectRatio: false,
-        plugins: {
-          legend: {
-            display: false,
-          }
-        },
-        interaction: {
-          intersect: false,
-          mode: 'index',
-        },
-        scales: {
-          y: {
-            grid: {
-              drawBorder: false,
-              display: true,
-              drawOnChartArea: true,
-              drawTicks: false,
-              borderDash: [5, 5]
-            },
-            ticks: {
-              display: true,
-              padding: 10,
-              color: '#fbfbfb',
-              font: {
-                size: 11,
-                family: "Open Sans",
-                style: 'normal',
-                lineHeight: 2
-              },
-            }
-          },
-          x: {
-            grid: {
-              drawBorder: false,
-              display: false,
-              drawOnChartArea: false,
-              drawTicks: false,
-              borderDash: [5, 5]
-            },
-            ticks: {
-              display: true,
-              color: '#ccc',
-              padding: 20,
-              font: {
-                size: 11,
-                family: "Open Sans",
-                style: 'normal',
-                lineHeight: 2
-              },
-            }
-          },
-        },
-      },
-    });
-  </script>
+
+
   <script>
     var win = navigator.platform.indexOf('Win') > -1;
     if (win && document.querySelector('#sidenav-scrollbar')) {
@@ -416,8 +336,103 @@
   <script async defer src="https://buttons.github.io/buttons.js"></script>
   <!-- Control Center for Soft Dashboard: parallax effects, scripts for the example pages etc -->
   <script src="./assets/js/argon-dashboard.min.js?v=2.0.4"></script>
-  <script src="../app/app.js"></script> 
+  <script src="../app/app.js"></script>
   <script src="../app/controller/ProductController.js"></script>
+  <script src="../app/controller/UserOrderController.js"></script>
+  <script>
+    app.controller('chartController', function($scope, $http) {
+
+      const API = 'http://phucuong.net/Caics/';
+      $http.get(API + 'pricepermonth').then(function(response) {
+        let priceMonth = response.data;
+        let ctx1 = document.getElementById("chart-line").getContext("2d");
+        let gradientStroke1 = ctx1.createLinearGradient(0, 230, 0, 50);
+        gradientStroke1.addColorStop(1, 'rgba(94, 114, 228, 0.2)');
+        gradientStroke1.addColorStop(0.2, 'rgba(94, 114, 228, 0.0)');
+        gradientStroke1.addColorStop(0, 'rgba(94, 114, 228, 0)');
+        new Chart(ctx1, {
+          type: "line",
+          data: {
+            labels: ["Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec", "Next", "Last"],
+            datasets: [{
+              label: "Total Sell",
+              tension: 0.4,
+              borderWidth: 0,
+              pointRadius: 0,
+              borderColor: "#5e72e4",
+              backgroundColor: gradientStroke1,
+              borderWidth: 3,
+              fill: true,
+              data: priceMonth.slice(0, 11).map(month => month.total),
+              maxBarThickness: 6
+            }],
+          },
+          options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+              legend: {
+                display: false,
+              }
+            },
+            interaction: {
+              intersect: false,
+              mode: 'index',
+            },
+            scales: {
+              y: {
+                grid: {
+                  drawBorder: false,
+                  display: true,
+                  drawOnChartArea: true,
+                  drawTicks: false,
+                  borderDash: [5, 5]
+                },
+                ticks: {
+                  display: true,
+                  padding: 10,
+                  color: '#fbfbfb',
+                  font: {
+                    size: 11,
+                    family: "Open Sans",
+                    style: 'normal',
+                    lineHeight: 2
+                  },
+                }
+              },
+              x: {
+                grid: {
+                  drawBorder: false,
+                  display: false,
+                  drawOnChartArea: false,
+                  drawTicks: false,
+                  borderDash: [5, 5]
+                },
+                ticks: {
+                  display: true,
+                  color: '#ccc',
+                  padding: 20,
+                  font: {
+                    size: 11,
+                    family: "Open Sans",
+                    style: 'normal',
+                    lineHeight: 2
+                  },
+                }
+              },
+            },
+          },
+        });
+
+
+      }, function(error) {
+        console.log(error);
+      });
+
+
+
+    })
+  </script>
 </body>
 
 </html><?php /**PATH /Applications/XAMPP/xamppfiles/htdocs/Caics/resources/views/admin.blade.php ENDPATH**/ ?>

@@ -1,52 +1,61 @@
 app.controller('CartController', function ($scope, $http) {
-    $scope.addProductToCart = function (product) {
-        var cart = JSON.parse(sessionStorage.getItem('cart')) || []; // Retrieve cart from session storage, or create new cart if none exists
+  const API = 'http://phucuong.net/Caics/';
+  const cart = JSON.parse(localStorage.getItem('cart')) || [];
 
-        var productIndex = cart.findIndex(function (cartProduct) { // Check if product already exists in cart
-            return cartProduct.id === product.id;
-        });
+  $scope.addProductToCart = function (product) {
+    const productIndex = cart.findIndex(p => p.id === product.id);
 
-        if (productIndex === -1) { // If product not in cart, add it    
-            product.quantity = 1; // Set initial quantity to 1
-            cart.push(product);
-        } else { // If product already in cart, increment quantity
-            cart[productIndex].quantity++;
-        }
-
-        sessionStorage.setItem('cart', JSON.stringify(cart)); // Store updated cart in session storage       
-    }
-    let cart = JSON.parse(sessionStorage.getItem('cart'));
-
-    $scope.setCart = cart ? cart : [];
-
-
-    $scope.checkCart = function (index) {
-        console.log($scope.setCart);
-
+    if (productIndex === -1) { // If product not in cart, add it    
+      product.quantity = 1; // Set initial quantity to 1
+      cart.push(product);
+    } else { // If product already in cart, increment quantity
+      cart[productIndex].quantity++;
     }
 
-    $scope.test = function () {
-        console.log('test');
-    }
+    localStorage.setItem('cart', JSON.stringify(cart)); // Store updated cart in local storage       
+  }
 
-    $scope.removeCart = function (index) {
-        
-        
-        cart.splice(index, 1); // Xóa phần tử đầu tiên trong mảng
-        sessionStorage.setItem('cart', JSON.stringify(cart));
-    }
-    if(cart){
-        $scope.cartCount = cart.length;
+  $scope.setCart = cart;
+
+  $scope.removeCart = function (index) {
+    cart.splice(index, 1);
+    localStorage.setItem('cart', JSON.stringify(cart));
+  }
+
+  $scope.cartCount = cart.length;
+
+  $scope.totalCartCheck = 0;
+  let totalpricecart = 0
+  for (var i = 0; i < $scope.setCart.length; i++) {
+
+    totalpricecart += ($scope.setCart[i].quantity * $scope.setCart[i].prd_price);
+  }
+  $scope.TotalPriceOfcart = totalpricecart;
+
+  $scope.getCheckout = function () {
+    let url = API + "getcheckout"
+    var formData = new FormData();
+    formData.append('name', $scope.checkout.name);
+    formData.append('phone', $scope.checkout.phone);
+    formData.append('email', $scope.checkout.email);
+    formData.append('adr', $scope.checkout.adr);
+    formData.append('price', $scope.TotalPriceOfcart);
+    let doneCart = $scope.setCart;
+    for(let i = 0; i < doneCart.length; i++){
+      formData.append('name_prd['+i+']', doneCart[i].prd_name);
+      formData.append('price_prd['+i+']', doneCart[i].prd_price);
+      formData.append('quantity['+i+']', doneCart[i].quantity);    
     }
     
-    $scope.$watch('cartCount', function (newVal, oldVal) {
-        if (newVal !== oldVal) {
-            // Cập nhật giá trị của phần tử HTML tương ứng
-            document.querySelector('.tip').innerText = newVal;
-        }
-    });
+    
+    $http({
+      method: 'POST',
+      url: url,
+      data: formData,
+      headers: { 'Content-Type': undefined } // Đặt content-type là undefined
+    }).then(function () {
+      window.alert("Order Successfully!!")
+    })
 
-    $scope.totalPrice = 0;
-
-            
-})
+  }
+});

@@ -29,7 +29,7 @@
                                 <th></th>
                             </tr>
                         </thead>
-                        <tbody ng-init="totalPrice = 0">
+                        <tbody>
                             <tr ng-repeat="(index, item) in setCart">
                                 <td class="cart__product__item">
                                     <img style="width: 80px; height: 80px;" src="<?php echo e(asset('/storage/app/public/images')); ?>/{{item.prd_img}}" alt="">
@@ -48,7 +48,8 @@
                                 <td class="cart__quantity">
                                     <input type="number" min="1" class="form-control" style="width: 80px; border-radius: 12px; text-align: center; padding-left: 10px ;" aria-label="Sizing example input" ng-model="item.quantity">
                                 </td>
-                                <td class="cart__total" ng-bind="item.quantity * item.prd_price"></td>
+                                <td class="cart__total" ng-bind="(item.quantity * item.prd_price)"></td>
+
                                 <td ng-click="removeCart($index)" class="cart__close"><span class="icon_close"></span></td>
                             </tr>
 
@@ -61,23 +62,23 @@
                             <td></td>
                             <td></td>
                             <td>
-                                <h4 style="color: red; font-weight: 600;" ng-bind="totalPrice"></h4>
+                                <h4 style="color: red; font-weight: 600;" ng-bind="{{TotalPriceOfcart}}"></h4>
                             </td>
-
                         </tfoot>
                     </table>
+
                 </div>
             </div>
         </div>
         <div class="row">
             <div class="col-lg-6 col-md-6 col-sm-6">
                 <div class="cart__btn">
-                <a href="<?php echo e(URL::asset('/home')); ?>">Continue Shopping</a>
+                    <a href="<?php echo e(URL::asset('/home')); ?>">Continue Shopping</a>
                 </div>
             </div>
             <div class="col-lg-6 col-md-6 col-sm-6">
                 <div class="cart__btn update__btn">
-                <a href="<?php echo e(URL::asset('/home')); ?>">Check Out</a>
+                    <a href="<?php echo e(URL::asset('/checkout')); ?>">Check Out</a>
                 </div>
             </div>
         </div>
@@ -104,6 +105,10 @@
         </div> -->
     </div>
 </section>
+<script>
+    // Get all elements with class "cart__total"
+
+</script>
 <!-- Shop Cart Section End -->
 <?php $__env->stopSection(); ?>
 <?php echo $__env->make('cart', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH /Applications/XAMPP/xamppfiles/htdocs/Caics/resources/views/pages-home/cart.blade.php ENDPATH**/ ?>

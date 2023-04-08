@@ -67,7 +67,7 @@
                             <li class="active"><a href="{{URL::asset('/home')}}">Home</a></li>
                             <li><a href="">Women’s</a></li>
                             <li><a href="">Men’s</a></li>
-                            <li><a href="{{URL::asset('shop')}}">Shop</a></li>
+                            <li><a href="{{URL::asset('/shop')}}">Shop</a></li>
                             <li><a href="">Pages</a>
                                 <ul class="dropdown">
                                     <li><a href="{{URL::asset('/productdetail')}}">Product Details</a></li>
@@ -77,15 +77,34 @@
                                 </ul>
                             </li>
                             <li><a href="./blog.html">Blog</a></li>
-                            <li><a href="./contact.html">Contact</a></li>
+                            <li><a href="./contact.html">Contact</a> </li>
                         </ul>
                     </nav>
                 </div>
                 <div class="col-lg-3">
                     <div class="header__right">
-                        <div class="header__right__auth">
-                            <a href="">Login</a>
-                            <a href="">Register</a>
+                        <div class="header__right__auth" style="margin-top: -30px;">
+                            <?php 
+                            if (isset($_SESSION['login'])) {
+                                echo '<nav class="header__menu">
+                                <ul>
+                                    <li><a href="">'.$_SESSION['login']['name'].'</a>
+                                        <ul class="dropdown">
+                                        <li><a href="">Profile</a></li>
+                                        <li><a href="' . url('/userorder') . '">Your Order</a></li>
+                                        <li><a href="' . url('/logout') . '">Logout</a></li>
+                                        </ul>
+                                    </li>
+                                    
+                                </ul>
+                            </nav> ';
+                               
+                            } else {
+                                echo '<a href="' . url('/signin') . '">Login</a>
+          <a href="' . url('/signup') . '">Register</a>';
+                            }
+                            ?>
+
                         </div>
                         <ul class="header__right__widget">
                             <li><span class="icon_search search-switch"></span></li>
@@ -93,7 +112,7 @@
                                     <div class="tip">2</div>
                                 </a></li>
                             <li><a href="{{URL::asset('/cart')}}"><span class="icon_bag_alt"></span>
-                                    <div class="tip" ng-bind="cartCount"></div>
+                                    <div class="tip">@{{cartCount}}</div>
                                 </a></li>
                         </ul>
                     </div>

@@ -40,7 +40,7 @@
     <div class="collapse navbar-collapse  w-auto " id="sidenav-collapse-main">
       <ul class="navbar-nav">
         <li class="nav-item">
-          <a class="nav-link active" href="<?php echo e(URL::to('/dashboard')); ?>">
+          <a class="nav-link active" href="<?php echo e(URL::asset('/dashboard')); ?>">
             <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
               <i class="ni ni-tv-2 text-primary text-sm opacity-10"></i>
             </div>
@@ -49,7 +49,7 @@
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link " href="<?php echo e(URL::to('/product')); ?>">
+          <a class="nav-link " href="<?php echo e(URL::asset('/product')); ?>">
             <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
               <i class="ni ni-calendar-grid-58 text-warning text-sm opacity-10"></i>
             </div>
@@ -332,7 +332,7 @@
     new Chart(ctx1, {
       type: "line",
       data: {
-        labels: ["Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+        labels: ["Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec","Next","Last"],
         datasets: [{
           label: "Mobile apps",
           tension: 0.4,
@@ -342,7 +342,7 @@
           backgroundColor: gradientStroke1,
           borderWidth: 3,
           fill: true,
-          data: [2, 2, 2, 2, 2, 2, 2, 2, 2],
+          data: [24, 242, 2234, 24, 22, 242, 22, 22, 242,12,1324,124,4124],
           maxBarThickness: 6
         }],
       },

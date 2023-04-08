@@ -121,4 +121,7 @@ class ProductController extends Controller
     {
         return view('pages-home.product-detail');
     }
+
+
+  
 }

@@ -228,7 +228,7 @@
                     </div>
                 </div>
                 <div class="col-lg-9 col-md-9"  >
-                    <div class="row" style="max-height: 400x; overflow: auto;">
+                    <div class="row">
                         <div class="col-lg-4 col-md-6" ng-repeat="x in records | limitTo:9">
                             <div class="product__item">
                                 <div class="product__item__pic set-bg" data-setbg="<?php echo e(asset('/storage/app/public/images')); ?>/{{x.prd_img}}">
